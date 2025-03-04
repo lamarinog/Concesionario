@@ -2,7 +2,7 @@ package Proyec;
 
 /**
  *
- * @author Blanca
+ * @author Luis Mariño
  */
 public class Vehiculo {
 

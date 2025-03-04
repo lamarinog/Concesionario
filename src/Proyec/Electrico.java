@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author Blanca
+ * @author Luis Mariño
  */
 public class Electrico extends Vehiculo {
 
