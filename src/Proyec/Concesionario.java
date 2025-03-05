@@ -21,32 +21,46 @@ public class Concesionario {
         int opcion = 0;
         while (opcion != 12) {
             opcion = menu(in);
-            if (opcion == 1) {
-                altaCoche(conce, in, inStr);
-            } else if (opcion == 2) {
-                generarPermiso(conce, inStr);
-            } else if (opcion == 3) {
-                informeEmisiones(conce, inStr);
-            } else if (opcion == 4) {
-                generarGlobal(conce);
-            } else if (opcion == 5) {
-                gestVenta(conce, inStr);
-            } else if (opcion == 6) {
-                mostrarActivo(conce, inStr);
-            } else if (opcion == 7) {
-                cambioNormativa(conce);
-            } else if (opcion == 8) {
-                abrirIncidencia(conce, inStr);
-            } else if (opcion == 9) {
-                mostrarIncidencias(conce, inStr);
-            } else if (opcion == 10) {
-                borrarCoche(conce, inStr);
-            } else if (opcion == 11) {
-                mostrarArray(conce);
-            } else if (opcion == 12) {
-                System.out.println("Se finaliza el programa.");
-            } else {
-                System.out.println("Elija una opcion correcta.");
+            switch (opcion) {
+                case 1:
+                    altaCoche(conce, in, inStr);
+                    break;
+                case 2:
+                    generarPermiso(conce, inStr);
+                    break;
+                case 3:
+                    informeEmisiones(conce, inStr);
+                    break;
+                case 4:
+                    generarGlobalPermiso(conce);
+                    break;
+                case 5:
+                    gestionVenta(conce, inStr);
+                    break;
+                case 6:
+                    mostrarActivos(conce, inStr);
+                    break;
+                case 7:
+                    cambioNormativaKw(conce);
+                    break;
+                case 8:
+                    abrirIncidencia(conce, inStr);
+                    break;
+                case 9:
+                    mostrarIncidencias(conce, inStr);
+                    break;
+                case 10:
+                    borrarCoche(conce, inStr);
+                    break;
+                case 11:
+                    mostrarArray(conce);
+                    break;
+                case 12:
+                    System.out.println("Se finaliza el programa.");
+                    break;
+                default:
+                    System.out.println("Elija una opcion correcta.");
+                    break;
             }
         }
     }
@@ -146,11 +160,7 @@ public class Concesionario {
         boolean vacio = true;
         for (int i = 0; i < data.length; i++) {
             if (data[i] != null) {
-                if (data[i] instanceof Electrico) {
-                    System.out.println(((Electrico) data[i]).toString());
-                } else {
-                    System.out.println(((Combustion) data[i]).toString());
-                }
+                data[i].informacion();
                 vacio = false;
             }
         }
@@ -163,8 +173,7 @@ public class Concesionario {
     public static void generarPermiso(Vehiculo[] data, Scanner inStr) {
         Vehiculo carro = buscar_mat(data, inStr);
         if (carro != null) {
-            System.out.println("modelo: " + carro.getModelo() + ", matricula: " + carro.getMatricula());
-            System.out.println("Se ha generado el permiso de circulacion.");
+            carro.permiso();
         } else {
             System.out.println("No existe la matricula para generar el permiso.");
         }
@@ -188,48 +197,33 @@ public class Concesionario {
     public static void informeEmisiones(Vehiculo[] data, Scanner inStr) {
         Vehiculo carro = buscar_mat(data, inStr);
         if (carro != null) {
-            if (carro instanceof Electrico) {
-                System.out.println("Se genera certificado de emisiones cero.");
-            } else {
-                System.out.println("No se puede generar certificado de emisiones cero.");
-            }
+            carro.emisiones();
         } else {
             System.out.println("No existe la matricula.");
         }
     }
 
     //GENERAR PERMISO A TODOS LOS VEHICULOS
-    public static void generarGlobal(Vehiculo[] data) {
+    public static void generarGlobalPermiso(Vehiculo[] data) {
         for (int i = 0; i < data.length; i++) {
             if (data[i] != null) {
-                if (data[i] instanceof Electrico) {
-                    System.out.println("modelo: " + data[i].getModelo() + ", matricula: " + data[i].getMatricula()
-                            + ", potencia: " + ((Electrico) data[i]).getPotencia_carga());
-                } else {
-                    System.out.println("modelo: " + data[i].getModelo() + ", matricula: " + data[i].getMatricula()
-                            + ", cilindrada: " + ((Combustion) data[i]).getCilindrada());
-                }
+                data[i].permiso();
             }
         }
         System.out.println("Se ha generado el permiso de todos los carros.");
     }
 
     //GESTIONAR LA VENTA DE UN VEHICULO Y DAR DE BAJA
-    public static void gestVenta(Vehiculo[] data, Scanner inStr) {
+    public static void gestionVenta(Vehiculo[] data, Scanner inStr) {
         Vehiculo coche = buscar_mat(data, inStr);
         if (coche != null) {
             coche.setActivo(false);
-            if (coche instanceof Electrico) {
-                System.out.println(((Electrico) coche).toString());
-            } else {
-                System.out.println(((Combustion) coche).toString());
-            }
-
+            coche.informacion();
         }
     }
 
     //MOSTRAR VEHICULOS QUE ESTAN DE ALTA Y BAJA
-    public static void mostrarActivo(Vehiculo[] data, Scanner inStr) {
+    public static void mostrarActivos(Vehiculo[] data, Scanner inStr) {
         System.out.println("Ingrese si quiere ver los carros que estan de alta o baja: ");
         String activo = inStr.nextLine();
         boolean activo1 = false;
@@ -245,11 +239,7 @@ public class Concesionario {
         for (int i = 0; i < data.length; i++) {
             if (data[i] != null) {
                 if (activo1 == data[i].getActivo()) {
-                    if (data[i] instanceof Electrico) {
-                        System.out.println(((Electrico) data[i]).toString());
-                    } else {
-                        System.out.println(((Combustion) data[i]).toString());
-                    }
+                    data[i].informacion();
                 }
             }
         }
@@ -257,16 +247,15 @@ public class Concesionario {
 
     //CAMBIAR DE KW A W EN VEHICULOS ELECTRICOS
     //SI CAMBIAMOS DE KW A MW LOS NUMEROS SALDRIAN MUY PEQUEÑOS, TODOS A 0 CON DECIMALES
-    public static void cambioNormativa(Vehiculo[] data) {
+    public static void cambioNormativaKw(Vehiculo[] data) {
         for (int i = 0; i < data.length; i++) {
             if (data[i] != null) {
-                if (data[i] instanceof Electrico) {
-                    ((Electrico) data[i]).normativa();
-                    //metodo estatico que hace lo mismo
-                    //((Electrico) data[i]).setPotencia_carga(((Electrico) data[i]).getPotencia_carga() * 1000);
-                }
+                //metodo no estatico
+                data[i].normativa();
+                //metodo estatico que hace lo mismo
+                //((Electrico) data[i]).setPotencia_carga(((Electrico) data[i]).getPotencia_carga() * 1000);              
             }
-        }
+        }System.out.println("Se ha realizado el cambio de la normativa de KW a W");
     }
 
     //ABRIR INCIDENCIA Y SI ESTA ABIERTA NO PODER COLOCAR TIEMPO DE INCIDENCIA

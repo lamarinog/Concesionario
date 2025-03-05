@@ -65,9 +65,22 @@ public class Combustion extends Vehiculo {
     }
 
     @Override
-    public String toString() {
-        return "Combustion{" + "cilindrada=" + cilindrada + ", tipo_motor=" + tipo_motor + ", consumo=" + consumo + ", potencia=" + potencia
-                + ", modelo=" + modelo + ", matricula=" + matricula + ", color=" + color + ",  activo=" + activo + "}";
+    public void informacion() {
+        super.informacion();
+        System.out.println("Combustion{" + "cilindrada=" + this.cilindrada + ", tipo_motor=" + this.tipo_motor + ", consumo=" + this.consumo + ", potencia=" + this.potencia
+                + "}");
+    }
+
+    @Override
+    public void emisiones() {
+        super.emisiones();
+        System.out.println("no se puede generar ya que es un vehiculo de combustion con tipo de motor: " + this.tipo_motor);
+    }
+
+    @Override
+    public void permiso() {
+        super.permiso();
+        System.out.println(", la potencia de carga es: " + this.cilindrada);
     }
 
 }

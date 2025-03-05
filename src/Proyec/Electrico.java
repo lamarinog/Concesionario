@@ -71,13 +71,27 @@ public class Electrico extends Vehiculo {
     }
 
     @Override
-    public String toString() {
-        return "Electrico{" + "capacidad_bat=" + capacidad_bat + ", consumo_elec=" + consumo_elec + ", autonomia=" + autonomia + ", potencia_carga=" + potencia_carga
-                + ", modelo=" + modelo + ", matricula=" + matricula + ", color=" + color + ",  activo=" + activo + "}";
+    public void informacion() {
+        super.informacion();
+        System.out.println("Electrico{" + "capacidad_bat=" + this.capacidad_bat + ", consumo_elec=" + this.consumo_elec + ", autonomia=" + this.autonomia + ", potencia_carga=" + this.potencia_carga
+                + "}");
     }
-
+    
+    @Override
     public void normativa() {
         this.potencia_carga = (this.potencia_carga * 1000);
+    }
+
+    @Override
+    public void emisiones() {
+        super.emisiones();
+        System.out.println("se puede generar.");
+    }
+
+    @Override
+    public void permiso() {
+        super.permiso();
+        System.out.println(", la potencia de carga es: " + this.potencia_carga);
     }
 
 }

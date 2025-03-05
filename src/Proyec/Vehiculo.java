@@ -63,4 +63,19 @@ public class Vehiculo {
         this.activo = activo;
     }
 
+    public void emisiones() {
+        System.out.print("El informe de emisiones zero: ");
+    }
+
+    public void informacion() {
+        System.out.print("Vehiculo{" + "modelo=" + this.modelo + ", matricula=" + this.matricula + ", color=" + this.color + ", activo=" + this.activo + '}');
+    }
+
+    public void permiso() {
+        System.out.print("El modelo del carro es :" + this.modelo + ", la matricula del carro es: " + this.matricula);
+    }
+
+    public void normativa() {
+    }
+
 }
