@@ -12,7 +12,7 @@ public class Vehiculo {
     protected boolean activo = true;
     //La incidencia va en String separados por comas sin espacios "incidencia abierta o cerrada, problema, horas"
     //ejemplo {"cerrada,llanta dañada,2"}
-    protected String incidencia;
+    //protected String incidencia;
 
     public Vehiculo(String modelo, String matricula, String color) {
         this.modelo = modelo;
@@ -51,13 +51,13 @@ public class Vehiculo {
         return activo;
     }
 
-    public String getIncidencia() {
-        return incidencia;
-    }
-
-    public void setIncidencia(String incidencia) {
-        this.incidencia = incidencia;
-    }
+//    public String getIncidencia() {
+//        return incidencia;
+//    }
+//
+//    public void setIncidencia(String incidencia) {
+//        this.incidencia = incidencia;
+//    }
 
     public void setActivo(boolean activo) {
         this.activo = activo;
