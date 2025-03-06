@@ -16,7 +16,8 @@ public class Concesionario {
         // TODO code application logic here
         Scanner in = new Scanner(System.in);
         Scanner inStr = new Scanner(System.in);
-        Vehiculo[] conce = new Vehiculo[10];
+        Vehiculo[] conce = new Vehiculo[50];
+        Incidencia[] inci = new Incidencia[50];
         ejemplos(conce);
         int opcion = 0;
         while (opcion != 12) {
@@ -44,10 +45,12 @@ public class Concesionario {
                     cambioNormativaKw(conce);
                     break;
                 case 8:
-                    abrirIncidencia(conce, inStr);
+                    //abrirIncidencia(conce, inStr);
+                    incidencia_clase(conce, inStr, inci, in);
                     break;
                 case 9:
-                    mostrarIncidencias(conce, inStr);
+                    //mostrarIncidencias(conce, inStr);
+                    mostrarIncidenciaClase(conce, inStr, inci);
                     break;
                 case 10:
                     borrarCoche(conce, inStr);
@@ -255,7 +258,8 @@ public class Concesionario {
                 //metodo estatico que hace lo mismo
                 //((Electrico) data[i]).setPotencia_carga(((Electrico) data[i]).getPotencia_carga() * 1000);              
             }
-        }System.out.println("Se ha realizado el cambio de la normativa de KW a W");
+        }
+        System.out.println("Se ha realizado el cambio de la normativa de KW a W");
     }
 
     //ABRIR INCIDENCIA Y SI ESTA ABIERTA NO PODER COLOCAR TIEMPO DE INCIDENCIA
@@ -336,6 +340,66 @@ public class Concesionario {
         }
         if (!borrar) {
             System.out.println("No se encontro el vehiculo.");
+        }
+    }
+
+    //INGRESAR INCIDENCIA AL ARRAY, SE GUARDA LA MATRICULA
+    public static void incidencia_clase(Vehiculo[] data, Scanner inStr, Incidencia[] incidencias, Scanner in) {
+        Vehiculo coche = buscar_mat(data, inStr);
+        String resuelto = "";
+        boolean agregar = false;
+        if (coche != null) {
+            for (int i = 0; i < incidencias.length; i++) {
+                if (incidencias[i] == null) {
+                    incidencias[i] = new Incidencia();
+                    incidencias[i].setId_incidencia((i + 1));
+                    incidencias[i].setMatricula(coche.getMatricula());
+                    System.out.println("Ingrese la incidencia: ");
+                    incidencias[i].setIncidencia(inStr.nextLine());
+                    System.out.println("Se finalizo la incidencia? Si o No");
+                    resuelto = inStr.nextLine();
+                    while (!(resuelto.equalsIgnoreCase("si") || resuelto.equalsIgnoreCase("no"))) {
+                        System.out.println("Solo se permite si o no: ");
+                        resuelto = inStr.nextLine();
+                    }
+                    if (resuelto.equalsIgnoreCase("si")) {
+                        incidencias[i].setResuelto(true);
+                        System.out.println("Cuanto tiempo demoro en minutos de resolver la incidencia: ");
+                        incidencias[i].setTiempo(in.nextInt());
+                    } else {
+                        System.out.println("Queda pendiente el incidente.");
+                    }
+                    agregar = true;
+                    System.out.println("Se agrego la incidencia");
+                    i = incidencias.length;
+                }
+            }
+            if (!agregar) {
+                System.out.println("El array de incidencias esta lleno.");
+            }
+        } else {
+            System.out.println("No se encontro la matricula.");
+        }
+    }
+
+    //MOSTRAR INCIDENCIAS POR MATRICULA
+    public static void mostrarIncidenciaClase(Vehiculo[] data, Scanner inStr, Incidencia[] incidencias) {
+        Vehiculo coche = buscar_mat(data, inStr);
+        boolean encontrar = false;
+        if (coche != null) {
+            for (int i = 0; i < incidencias.length; i++) {
+                if (incidencias[i] != null) {
+                    if (coche.getMatricula().equalsIgnoreCase(incidencias[i].getMatricula())) {
+                        System.out.println(incidencias[i].toString());
+                        encontrar = true;
+                    }
+                }
+            }
+            if (!encontrar) {
+                System.out.println("No tiene incidencias este vehiculo aun.");
+            }
+        } else {
+            System.out.println("No se encontro la matricula.");
         }
     }
 }
