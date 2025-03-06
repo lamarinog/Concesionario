@@ -263,7 +263,7 @@ public class Concesionario {
     }
 
     //ABRIR INCIDENCIA Y SI ESTA ABIERTA NO PODER COLOCAR TIEMPO DE INCIDENCIA
-    public static void abrirIncidencia(Vehiculo[] data, Scanner inStr) {
+    /*public static void abrirIncidencia(Vehiculo[] data, Scanner inStr) {
         Vehiculo coche = buscar_mat(data, inStr);
         String cadenaP = coche.getIncidencia();
         if (cadenaP == null) {
@@ -321,7 +321,7 @@ public class Concesionario {
         } else {
             System.out.println("No existe la matricula");
         }
-    }
+    }*/
 
     //BORRAR COCHE POR MATRICULA
     public static void borrarCoche(Vehiculo[] data, Scanner inStr) {
