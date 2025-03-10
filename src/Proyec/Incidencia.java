@@ -48,4 +48,20 @@ public class Incidencia {
         return "Incidencia{" + "matricula=" + matricula + ", id_incidencia=" + id_incidencia + ", incidencia=" + incidencia + ", tiempo=" + tiempo + ", resuelto=" + resuelto + '}';
     }
 
+    public boolean isResuelto() {
+        return resuelto;
+    }
+
+    public int getId_incidencia() {
+        return id_incidencia;
+    }
+
+    public String getIncidencia() {
+        return incidencia;
+    }
+
+    public int getTiempo() {
+        return tiempo;
+    }
+
 }

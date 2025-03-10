@@ -20,7 +20,7 @@ public class Concesionario {
         Incidencia[] inci = new Incidencia[50];
         ejemplos(conce);
         int opcion = 0;
-        while (opcion != 12) {
+        while (opcion != 13) {
             opcion = menu(in);
             switch (opcion) {
                 case 1:
@@ -49,16 +49,20 @@ public class Concesionario {
                     incidencia_clase(conce, inStr, inci, in);
                     break;
                 case 9:
+                    //abrirIncidencia(conce, inStr);
+                    modificar_incidencia(conce, inStr, inci, in);
+                    break;
+                case 10:
                     //mostrarIncidencias(conce, inStr);
                     mostrarIncidenciaClase(conce, inStr, inci);
                     break;
-                case 10:
+                case 11:
                     borrarCoche(conce, inStr);
                     break;
-                case 11:
+                case 12:
                     mostrarArray(conce);
                     break;
-                case 12:
+                case 13:
                     System.out.println("Se finaliza el programa.");
                     break;
                 default:
@@ -78,10 +82,11 @@ public class Concesionario {
         System.out.println("6. Mostrar coches activos o de baja.");
         System.out.println("7. Cambio de normativa.");
         System.out.println("8. Abrir incidencia.");
-        System.out.println("9. Mostrar incidencias.");
-        System.out.println("10. Borrar coche por matricula.");
-        System.out.println("11. Mostrar todos los coches.");
-        System.out.println("12. Salir.");
+        System.out.println("9. Cerrar incidencia.");
+        System.out.println("10. Mostrar incidencias.");
+        System.out.println("11. Borrar coche por matricula.");
+        System.out.println("12. Mostrar todos los coches.");
+        System.out.println("13. Salir.");
         System.out.println("Elija la opción a realizar: ");
         int opcion = in.nextInt();
         return opcion;
@@ -322,7 +327,6 @@ public class Concesionario {
             System.out.println("No existe la matricula");
         }
     }*/
-
     //BORRAR COCHE POR MATRICULA
     public static void borrarCoche(Vehiculo[] data, Scanner inStr) {
         System.out.println("Indique la matricula del vehiculo que se quiere borrar: ");
@@ -352,7 +356,7 @@ public class Concesionario {
             for (int i = 0; i < incidencias.length; i++) {
                 if (incidencias[i] == null) {
                     incidencias[i] = new Incidencia();
-                    incidencias[i].setId_incidencia((i + 1));
+                    incidencias[i].setId_incidencia((i));
                     incidencias[i].setMatricula(coche.getMatricula());
                     System.out.println("Ingrese la incidencia: ");
                     incidencias[i].setIncidencia(inStr.nextLine());
@@ -382,7 +386,41 @@ public class Concesionario {
         }
     }
 
+    public static void modificar_incidencia(Vehiculo[] data, Scanner inStr, Incidencia[] incidencias, Scanner in) {
+        Vehiculo coche = buscar_mat(data, inStr);
+        if (coche != null) {
+            for (int i = 0; i < incidencias.length; i++) {
+                if (incidencias[i] != null) {
+                    if (coche.getMatricula().equalsIgnoreCase(incidencias[i].getMatricula())) {
+                        if (!incidencias[i].isResuelto()) {
+                            System.out.print("Se muestran las incidencias del vehiculo: ");
+                            System.out.print(incidencias[i].getId_incidencia() + " - ");
+                        }
+                    }
+                }
+
+            }
+            System.out.println("Elija el id a cerrar incidencia: ");
+            int id = in.nextInt();
+            for (int i = 0; i < incidencias.length; i++) {
+                if (incidencias[i] != null) {
+                    if (id == incidencias[i].getId_incidencia()) {
+                        System.out.println("Se cierra la incidencia.");
+                        incidencias[i].setResuelto(true);
+                        System.out.println("Indique el tiempo de resuelto: ");
+                        int minutos = in.nextInt();
+                        incidencias[i].setTiempo(minutos);
+                        i = incidencias.length;
+                    }
+                }
+            }
+        } else {
+            System.out.println("No existe la matricula.");
+        }
+
+    }
     //MOSTRAR INCIDENCIAS POR MATRICULA
+
     public static void mostrarIncidenciaClase(Vehiculo[] data, Scanner inStr, Incidencia[] incidencias) {
         Vehiculo coche = buscar_mat(data, inStr);
         boolean encontrar = false;
