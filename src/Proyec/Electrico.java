@@ -76,7 +76,7 @@ public class Electrico extends Vehiculo {
         System.out.println("Electrico{" + "capacidad_bat=" + this.capacidad_bat + ", consumo_elec=" + this.consumo_elec + ", autonomia=" + this.autonomia + ", potencia_carga=" + this.potencia_carga
                 + "}");
     }
-    
+
     @Override
     public void normativa() {
         this.potencia_carga = (this.potencia_carga * 1000);

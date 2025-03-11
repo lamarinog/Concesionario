@@ -58,7 +58,6 @@ public class Vehiculo {
 //    public void setIncidencia(String incidencia) {
 //        this.incidencia = incidencia;
 //    }
-
     public void setActivo(boolean activo) {
         this.activo = activo;
     }

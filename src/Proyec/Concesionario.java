@@ -21,6 +21,7 @@ public class Concesionario {
 
     //MENU DE NUESTRO PROGRAMA
     public static void menu(Vehiculo[] data, Incidencia[] inci) {
+        System.out.println("Bienvenido al sistema del concesionario.");
         Scanner in = new Scanner(System.in);
         Scanner inStr = new Scanner(System.in);
         int opcion = 0;

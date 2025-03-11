@@ -10,15 +10,17 @@ import java.util.Scanner;
 public class incidenciaFunc {
 
     public static void incidencia_clase(Vehiculo[] data, Incidencia[] inci) {
+        System.out.println("Bienvenido al sistema de incidencias.");
         Scanner in = new Scanner(System.in);
         Scanner inStr = new Scanner(System.in);
         int opcion = 0;
-        while (opcion != 11) {
+        while (opcion != 6) {
             System.out.println("1. Abrir incidencias.");
             System.out.println("2. Modificar incidencias.");
             System.out.println("3. Cerrar incidencias.");
             System.out.println("4. Borrar incidencias.");
-            System.out.println("5. Volver al menu principal.");
+            System.out.println("5. mostrar incidencias.");
+            System.out.println("6. Volver al menu principal.");
             opcion = in.nextInt();
             switch (opcion) {
                 case 1:
@@ -45,7 +47,6 @@ public class incidenciaFunc {
                     break;
             }
         }
-
     }
 
     //INGRESAR INCIDENCIA AL ARRAY, SE GUARDA LA MATRICULA
