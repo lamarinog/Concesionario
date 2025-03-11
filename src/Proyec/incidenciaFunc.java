@@ -11,7 +11,7 @@ public class incidenciaFunc {
 
     public static void incidencia_clase(Vehiculo[] data, Incidencia[] inci) {
         System.out.println("Bienvenido al sistema de incidencias.");
-        Scanner in = new Scanner(System.in);
+        Scanner in1 = new Scanner(System.in);
         Scanner inStr = new Scanner(System.in);
         int opcion = 0;
         while (opcion != 6) {
@@ -21,19 +21,19 @@ public class incidenciaFunc {
             System.out.println("4. Borrar incidencias.");
             System.out.println("5. mostrar incidencias.");
             System.out.println("6. Volver al menu principal.");
-            opcion = in.nextInt();
+            opcion = in1.nextInt();
             switch (opcion) {
                 case 1:
-                    abrir_incidencia(data, inStr, inci, in);
+                    abrir_incidencia(data, inStr, inci, in1);
                     break;
                 case 2:
-                    modificar_incidencia(data, inStr, inci, in);
+                    modificar_incidencia(data, inStr, inci, in1);
                     break;
                 case 3:
-                    cerrar_incidencia(data, inStr, inci, in);
+                    cerrar_incidencia(data, inStr, inci, in1);
                     break;
                 case 4:
-                    borrar_incidencia(data, inStr, inci, in);
+                    borrar_incidencia(data, inStr, inci, in1);
                     break;
                 case 5:
                     mostrar_incidencia(data, inStr, inci);
@@ -90,17 +90,19 @@ public class incidenciaFunc {
 
     //CERRAR INCIDENCIA ABIERTA POR ID
     public static void cerrar_incidencia(Vehiculo[] data, Scanner inStr, Incidencia[] incidencias, Scanner in) {
-        mostrar_incidencia(data, inStr, incidencias);
-        System.out.println("Elija el id a cerrar incidencia: ");
-        int id = in.nextInt();
-        incidencias[id].setResuelto(true);
-        System.out.println("Ingrese el tiempo que se utilizo para resolver la incidencia: ");
-        int minutos = in.nextInt();
-        incidencias[id].setTiempo(minutos);
+        boolean check = mostrar_incidencia(data, inStr, incidencias);
+        if (check) {
+            System.out.println("Elija el id a cerrar incidencia: ");
+            int id = in.nextInt();
+            incidencias[id].setResuelto(true);
+            System.out.println("Ingrese el tiempo que se utilizo para resolver la incidencia: ");
+            int minutos = in.nextInt();
+            incidencias[id].setTiempo(minutos);
+        }
     }
 
     //MOSTRAR INCIDENCIAS POR MATRICULA
-    public static void mostrar_incidencia(Vehiculo[] data, Scanner inStr, Incidencia[] incidencias) {
+    public static boolean mostrar_incidencia(Vehiculo[] data, Scanner inStr, Incidencia[] incidencias) {
         Vehiculo coche = buscar_mat(data, inStr);
         boolean encontrar = false;
         if (coche != null) {
@@ -118,42 +120,47 @@ public class incidenciaFunc {
         } else {
             System.out.println("No se encontro la matricula.");
         }
+        return encontrar;
     }
 
     public static void borrar_incidencia(Vehiculo[] data, Scanner inStr, Incidencia[] incidencias, Scanner in) {
-        mostrar_incidencia(data, inStr, incidencias);
-        System.out.println("Elija el id a borrar incidencia: ");
-        int id = in.nextInt();
-        incidencias[id] = null;
-        System.out.println("Se borro la incidencia");
+        boolean check = mostrar_incidencia(data, inStr, incidencias);
+        if (check) {
+            System.out.println("Elija el id a borrar incidencia: ");
+            int id = in.nextInt();
+            incidencias[id] = null;
+            System.out.println("Se borro la incidencia");
+        }
     }
 
     public static void modificar_incidencia(Vehiculo[] data, Scanner inStr, Incidencia[] incidencias, Scanner in) {
-        mostrar_incidencia(data, inStr, incidencias);
-        System.out.println("Elija el id a modificar incidencia: ");
-        int id = in.nextInt();
-        int opcion = 0;
-        while (opcion != 3) {
-            System.out.println("1. Modificar horas");
-            System.out.println("1. Modificar problema");
-            System.out.println("3. Volver al menu de incidencias");
-            switch (opcion) {
-                case 1:
-                    System.out.println("Indicar modificacion de horas en minutos: ");
-                    int minutos = in.nextInt();
-                    incidencias[id].setTiempo(minutos);
-                    break;
-                case 2:
-                    System.out.println("Indicar el nuevo problema: ");
-                    String problema = inStr.nextLine();
-                    incidencias[id].setIncidencia(problema);
-                    break;
-                case 3:
-                    System.out.println("Se regresa al menu de incidencias.");
-                    incidencia_clase(data, incidencias);
-                    break;
-                default:
-                    System.out.println("Elija una opcion correcta.");
+        boolean check = mostrar_incidencia(data, inStr, incidencias);
+        if (check) {
+            System.out.println("Elija el id a modificar incidencia: ");
+            int id = in.nextInt();
+            int opcion = 0;
+            while (opcion != 3) {
+                System.out.println("1. Modificar horas");
+                System.out.println("1. Modificar problema");
+                System.out.println("3. Volver al menu de incidencias");
+                switch (opcion) {
+                    case 1:
+                        System.out.println("Indicar modificacion de horas en minutos: ");
+                        int minutos = in.nextInt();
+                        incidencias[id].setTiempo(minutos);
+                        break;
+                    case 2:
+                        System.out.println("Indicar el nuevo problema: ");
+                        String problema = inStr.nextLine();
+                        incidencias[id].setIncidencia(problema);
+                        break;
+                    case 3:
+                        System.out.println("Se regresa al menu de incidencias.");
+                        incidencia_clase(data, incidencias);
+                        break;
+                    default:
+                        System.out.println("Elija una opcion correcta.");
+                }
             }
         }
     }

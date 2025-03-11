@@ -62,6 +62,7 @@ public class Concesionario {
                     cambioNormativaKw(data);
                     break;
                 case 8:
+                    opcion = 11;
                     incidencia_clase(data, inci);
                     break;
                 case 9:
@@ -71,7 +72,6 @@ public class Concesionario {
                     mostrarArray(data);
                     break;
                 case 11:
-                    System.out.println("Se finaliza el programa.");
                     break;
                 default:
                     System.out.println("Elija una opcion correcta.");
@@ -215,6 +215,8 @@ public class Concesionario {
         if (coche != null) {
             coche.setActivo(false);
             coche.informacion();
+        } else {
+            System.out.println("No existe la matricula.");
         }
     }
 
