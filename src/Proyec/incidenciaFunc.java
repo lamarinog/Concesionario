@@ -40,7 +40,7 @@ public class incidenciaFunc {
                     break;
                 case 6:
                     System.out.println("Se regresa al menu principal.");
-                    menu(data, inci);
+                    //menu(data, inci);
                     break;
                 default:
                     System.out.println("Elija una opcion correcta.");
@@ -141,8 +141,9 @@ public class incidenciaFunc {
             int opcion = 0;
             while (opcion != 3) {
                 System.out.println("1. Modificar horas");
-                System.out.println("1. Modificar problema");
+                System.out.println("2. Modificar problema");
                 System.out.println("3. Volver al menu de incidencias");
+                opcion = in.nextInt();
                 switch (opcion) {
                     case 1:
                         System.out.println("Indicar modificacion de horas en minutos: ");
@@ -156,7 +157,7 @@ public class incidenciaFunc {
                         break;
                     case 3:
                         System.out.println("Se regresa al menu de incidencias.");
-                        incidencia_clase(data, incidencias);
+                        //incidencia_clase(data, incidencias);
                         break;
                     default:
                         System.out.println("Elija una opcion correcta.");

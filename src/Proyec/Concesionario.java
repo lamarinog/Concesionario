@@ -62,16 +62,17 @@ public class Concesionario {
                     cambioNormativaKw(data);
                     break;
                 case 8:
-                    opcion = 11;
+                    //opcion = 11;
                     incidencia_clase(data, inci);
                     break;
                 case 9:
-                    borrarCoche(data, inStr);
+                    borrarCoche(data, inStr, inci);
                     break;
                 case 10:
                     mostrarArray(data);
                     break;
                 case 11:
+                    System.out.println("Se finaliza el programa.");
                     break;
                 default:
                     System.out.println("Elija una opcion correcta.");
@@ -258,13 +259,21 @@ public class Concesionario {
     }
 
     //BORRAR COCHE POR MATRICULA
-    public static void borrarCoche(Vehiculo[] data, Scanner inStr) {
+    public static void borrarCoche(Vehiculo[] data, Scanner inStr, Incidencia[] inci) {
+        Scanner in = new Scanner(System.in);
         System.out.println("Indique la matricula del vehiculo que se quiere borrar: ");
         String matricula = inStr.nextLine();
         boolean borrar = false;
         for (int i = 0; i < data.length; i++) {
             if (data[i] != null) {
                 if (matricula.equalsIgnoreCase(data[i].getMatricula())) {
+                    for (int j = 0; j < inci.length; j++) {
+                        if (inci[j] != null) {
+                            if (data[i].getMatricula().equalsIgnoreCase(inci[j].getMatricula())) {
+                                inci[j] = null;
+                            }
+                        }
+                    }
                     data[i] = null;
                     i = data.length;
                     borrar = true;
