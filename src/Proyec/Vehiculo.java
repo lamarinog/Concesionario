@@ -4,20 +4,19 @@ package Proyec;
  *
  * @author Luis Mariño
  */
-public class Vehiculo {
+public abstract class Vehiculo {
 
     protected String modelo;
     protected String matricula;
     protected String color;
     protected boolean activo = true;
-    //La incidencia va en String separados por comas sin espacios "incidencia abierta o cerrada, problema, horas"
-    //ejemplo {"cerrada,llanta dañada,2"}
-    //protected String incidencia;
+    protected double precio;
 
-    public Vehiculo(String modelo, String matricula, String color) {
+    public Vehiculo(String modelo, String matricula, String color, double precio) {
         this.modelo = modelo;
         this.matricula = matricula;
         this.color = color;
+        this.precio = precio;
     }
 
     public Vehiculo() {
@@ -33,6 +32,14 @@ public class Vehiculo {
 
     public String getMatricula() {
         return matricula;
+    }
+
+    public double getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
     }
 
     public void setMatricula(String matricula) {
@@ -51,13 +58,6 @@ public class Vehiculo {
         return activo;
     }
 
-//    public String getIncidencia() {
-//        return incidencia;
-//    }
-//
-//    public void setIncidencia(String incidencia) {
-//        this.incidencia = incidencia;
-//    }
     public void setActivo(boolean activo) {
         this.activo = activo;
     }
@@ -67,14 +67,19 @@ public class Vehiculo {
     }
 
     public void informacion() {
-        System.out.print("Vehiculo{" + "modelo=" + this.modelo + ", matricula=" + this.matricula + ", color=" + this.color + ", activo=" + this.activo + '}');
+        System.out.print("Vehiculo{" + "modelo=" + this.modelo + ", matricula=" + this.matricula + ", color=" + this.color + ", precio=" + this.precio + ", activo=" + this.activo + '}');
     }
 
     public void permiso() {
         System.out.print("El modelo del carro es :" + this.modelo + ", la matricula del carro es: " + this.matricula);
     }
 
-    public void normativa() {
-    }
+    public void normativa(){};
+
+    public abstract void generaFacturaVenta();
+    
+    public abstract void tipoPrecio();
+    
+    public abstract void cambioPrecio();
 
 }

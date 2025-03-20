@@ -14,8 +14,8 @@ public class Combustion extends Vehiculo {
     private double consumo;
     private double potencia;
 
-    public Combustion(String modelo, String matricula, String color, double cilindrada, String tipo_motor, double consumo, double potencia) {
-        super(modelo, matricula, color);
+    public Combustion(String modelo, String matricula, String color, double precio, double cilindrada, String tipo_motor, double consumo, double potencia) {
+        super(modelo, matricula, color, precio);
         this.cilindrada = cilindrada;
         this.setTipo_motor(tipo_motor);
         this.consumo = consumo;
@@ -71,16 +71,30 @@ public class Combustion extends Vehiculo {
                 + "}");
     }
 
-    @Override
-    public void emisiones() {
-        super.emisiones();
-        System.out.println("no se puede generar ya que es un vehiculo de combustion con tipo de motor: " + this.tipo_motor);
-    }
-
+//    @Override
+//    public void emisiones() {
+//        super.emisiones();
+//        System.out.println("no se puede generar ya que es un vehiculo de combustion con tipo de motor: " + this.tipo_motor);
+//    }
     @Override
     public void permiso() {
         super.permiso();
         System.out.println(", la potencia de carga es: " + this.cilindrada);
     }
 
+    @Override
+    public void generaFacturaVenta() {
+        System.out.println("Se genera la factura, el precio es: " + this.precio + " €");
+    }
+
+    @Override
+    public void tipoPrecio() {
+        System.out.println("El tipo es combustion y el precio es " + this.precio + " €");
+    }
+
+    @Override
+    public void cambioPrecio() {
+        System.out.println("El precio en euros es: " + this.precio + " €");
+        System.out.println("El precio en yenes es: " + (this.precio * 161.32) + " ¥");
+    }
 }

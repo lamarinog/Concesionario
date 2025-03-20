@@ -14,8 +14,8 @@ public class Electrico extends Vehiculo {
     private double autonomia;
     private double potencia_carga;
 
-    public Electrico(String modelo, String matricula, String color, double capacidad_bat, double consumo_elec, double autonomia, double potencia_carga) {
-        super(modelo, matricula, color);
+    public Electrico(String modelo, String matricula, String color, double precio, double capacidad_bat, double consumo_elec, double autonomia, double potencia_carga) {
+        super(modelo, matricula, color, precio);
         this.setCapacidad_bat(capacidad_bat);
         this.consumo_elec = consumo_elec;
         this.setAutonomia(autonomia);
@@ -85,13 +85,31 @@ public class Electrico extends Vehiculo {
     @Override
     public void emisiones() {
         super.emisiones();
-        System.out.println("se puede generar.");
+        System.out.println("se puede generar ya que es un vehiculo electrico.");
     }
 
     @Override
     public void permiso() {
         super.permiso();
         System.out.println(", la potencia de carga es: " + this.potencia_carga);
+    }
+
+    @Override
+    public void generaFacturaVenta() {
+        System.out.println("Tiene una bonificacion de 4000€ al ser un coche electrico");
+        System.out.println("El precio sin bonificacion es: " + this.precio + " €");
+        System.out.println("El precio con bonificacion es: " + (this.precio - 4000) + " €");
+    }
+
+    @Override
+    public void tipoPrecio() {
+        System.out.println("El tipo es electrico y el precio con bonificacion es " + (this.precio - 4000) + " €");
+    }
+
+    @Override
+    public void cambioPrecio() {
+        System.out.println("El precio en euros con bonificacion  es: " + (this.precio - 4000) + " €");
+        System.out.println("El precio en dolares con bonificacion es: " + ((this.precio - 4000) * 1.08) + " $");
     }
 
 }
