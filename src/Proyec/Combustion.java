@@ -93,8 +93,10 @@ public class Combustion extends Vehiculo {
     }
 
     @Override
-    public void cambioPrecio() {
+    public void cambioPrecio() {}
         System.out.println("El precio en euros es: " + this.precio + " €");
-        System.out.println("El precio en yenes es: " + (this.precio * 161.32) + " ¥");
+        System.out.println("El precio en yenes es: " + (this.precio * YENES) + " ¥");
     }
+    
+    private final double YENES = 161.32;
 }
